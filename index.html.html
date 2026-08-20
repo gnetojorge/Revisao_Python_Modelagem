@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revisão de Python — Modelagem de Sistemas</title>
+<style>
+:root{--blue:#0b5cab;--navy:#17324d;--light:#eef6fc;--green:#087f5b;--gold:#e6a11a;--ink:#17202a;--muted:#5f6f7f;--bg:#f4f7fa;--card:#fff;--border:#dbe3ea;--code:#17232e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.6}
+header{background:linear-gradient(135deg,#17324d,#0b5cab);color:#fff;padding:42px 18px}.container{max-width:1050px;margin:auto}
+header h1{font-size:clamp(30px,5vw,46px);margin:0 0 10px}header p{font-size:18px;max-width:850px;margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.badge{padding:6px 11px;border-radius:20px;background:rgba(255,255,255,.15);font-size:13px}
+nav{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--border)}nav .container{display:flex;gap:5px;overflow:auto;padding:9px}nav a{white-space:nowrap;color:var(--blue);text-decoration:none;font-weight:700;padding:8px 10px;border-radius:8px;font-size:13px}nav a:hover{background:var(--light)}
+main{padding:25px 14px 60px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin:18px 0;box-shadow:0 3px 12px rgba(20,45,70,.05)}
+h2{color:var(--navy);margin-top:0}h3{color:var(--navy)}.intro{border-left:5px solid var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.mini{background:#f8fafc;border:1px solid var(--border);padding:15px;border-radius:12px}
+.exercise{border:1px solid var(--border);border-radius:13px;padding:18px;margin:15px 0}.task{background:#f8fafc;padding:13px;border-radius:9px;border:1px solid var(--border)}
+.level{font-size:11px;color:var(--blue);background:var(--light);padding:4px 8px;border-radius:12px}.tip{background:#eef8f4;border-left:5px solid var(--green);padding:14px;border-radius:8px}
+.challenge{background:#fff8e8;border-left:5px solid var(--gold);padding:15px;border-radius:8px}
+pre{background:var(--code);color:#eef5fa;padding:16px;border-radius:10px;overflow:auto;font-size:14px;line-height:1.5}
+details{margin-top:10px}summary{cursor:pointer;color:var(--blue);font-weight:700}
+input[type=text],textarea{width:100%;border:1px solid var(--border);border-radius:8px;padding:9px;font:inherit}textarea{min-height:80px;resize:vertical}
+.check{display:flex;gap:8px;margin:7px 0}.check input{margin-top:5px}
+.bloom{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}.bloom div{text-align:center;background:#f8fafc;border:1px solid var(--border);border-radius:9px;padding:10px;font-size:12px}.bloom strong{display:block;color:var(--blue)}
+footer{text-align:center;color:var(--muted);padding:25px}
+@media(max-width:750px){.bloom{grid-template-columns:repeat(2,1fr)}}@media print{nav{display:none}.card{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+<div class="container">
+<h1>Revisão de Python</h1>
+<p><strong>Missão:</strong> transformar conhecimentos de programação em uma solução para um problema de sistema.</p>
+<div class="badges"><span class="badge">2º Ano — Eixo II</span><span class="badge">Modelagem de Sistemas</span><span class="badge">Revisão prática</span><span class="badge">Python</span></div>
+</div>
+</header>
+
+<nav><div class="container">
+<a href="#missao">Missão</a><a href="#diagnostico">Comece</a><a href="#dados">Dados</a><a href="#listas">Listas</a><a href="#lacos">Laços</a><a href="#condicoes">Condições</a><a href="#funcoes">Funções</a><a href="#modelagem">Modelagem</a><a href="#classes">Classes</a><a href="#desafio">Desafio final</a>
+</div></nav>
+
+<main class="container">
+
+<section id="missao" class="card intro">
+<h2>🎯 Sua missão</h2>
+<div class="challenge">
+<p>Imagine que você faz parte de uma equipe de desenvolvimento. Uma escola precisa de um pequeno sistema para organizar alunos, notas e situações de aprendizagem.</p>
+<p>Antes de criar o sistema, você precisa recuperar conceitos importantes de Python e descobrir como eles se conectam à <strong>Modelagem de Sistemas</strong>.</p>
+<p><strong>Ao final:</strong> você deverá construir um protótipo simples usando classes, objetos, listas, laços, condições, cálculos e funções.</p>
+</div>
+<h3>O que você vai revisar?</h3>
+<div class="grid">
+<div class="mini"><strong>Dados</strong><br>Variáveis e tipos</div>
+<div class="mini"><strong>Organização</strong><br>Listas e estruturas compostas</div>
+<div class="mini"><strong>Regras</strong><br>if, elif e else</div>
+<div class="mini"><strong>Repetição</strong><br>for e while</div>
+<div class="mini"><strong>Processamento</strong><br>Cálculos e funções</div>
+<div class="mini"><strong>Modelagem</strong><br>Classes e objetos</div>
+</div>
+</section>
+
+<section id="diagnostico" class="card">
+<h2>🧠 1. Antes de começar</h2>
+<p>Responda sem pesquisar. O objetivo é descobrir o que você já lembra.</p>
+<div class="exercise">
+<h3>Desafio rápido</h3>
+<ol>
+<li>O que é uma variável?</li>
+<li>Para que serve uma lista?</li>
+<li>Qual a função de um <code>if</code>?</li>
+<li>Para que usamos um <code>for</code>?</li>
+<li>O que é uma função?</li>
+<li>Qual a diferença entre classe e objeto?</li>
+</ol>
+<textarea placeholder="Escreva suas respostas..."></textarea>
+</div>
+<div class="tip"><strong>Aprenda fazendo:</strong> tente resolver os próximos exercícios antes de procurar uma solução. Errar, testar e corrigir faz parte da programação.</div>
+</section>
+
+<section id="dados" class="card">
+<h2>📦 2. Variáveis e dados</h2>
+
+<div class="exercise">
+<h3>Atividade 1 — Cadastro simples <span class="level">Lembrar → Compreender</span></h3>
+<div class="task">Crie variáveis para representar um aluno.</div>
+<pre><code>nome = "Ana"
+idade = 17
+curso = "Desenvolvimento de Sistemas"
+media = 8.5
+
+print("Nome:", nome)
+print("Idade:", idade)
+print("Curso:", curso)
+print("Média:", media)</code></pre>
+<p><strong>Agora faça:</strong> altere os dados para representar você.</p>
+</div>
+
+<div class="exercise">
+<h3>Atividade 2 — Entrada de dados <span class="level">Aplicar</span></h3>
+<div class="task">Faça o programa perguntar o nome, idade e nota.</div>
+<pre><code>nome = input("Digite seu nome: ")
+idade = int(input("Digite sua idade: "))
+nota = float(input("Digite sua nota: "))
+
+print("Aluno:", nome)
+print("Idade:", idade)
+print("Nota:", nota)</code></pre>
+<p><strong>Desafio:</strong> acrescente a informação do curso.</p>
+</div>
+
+<div class="exercise">
+<h3>Atividade 3 — Dados compostos <span class="level">Compreender → Aplicar</span></h3>
+<pre><code>aluno = {
+    "nome": "Marina",
+    "idade": 17,
+    "curso": "Desenvolvimento de Sistemas"
+}
+
+print(aluno["nome"])
+print(aluno["curso"])</code></pre>
+<p><strong>Pense:</strong> por que esses dados fazem sentido juntos?</p>
+</div>
+</section>
+
+<section id="listas" class="card">
+<h2>📋 3. Listas</h2>
+
+<div class="exercise">
+<h3>Atividade 4 — Lista de notas <span class="level">Aplicar</span></h3>
+<pre><code>notas = [7, 8, 6, 9, 10]
+
+print("Notas:", notas)
+print("Primeira nota:", notas[0])
+print("Quantidade:", len(notas))</code></pre>
+<p><strong>Faça:</strong> adicione uma nova nota usando <code>append()</code> e altere uma nota.</p>
+</div>
+
+<div class="exercise">
+<h3>Atividade 5 — Lista de alunos <span class="level">Aplicar</span></h3>
+<div class="task">Crie uma lista com pelo menos cinco nomes de alunos.</div>
+<pre><code>alunos = ["Ana", "Carlos", "Marina", "Pedro", "João"]
+
+print(alunos)</code></pre>
+<p><strong>Desafio:</strong> adicione outro nome sem alterar os nomes existentes.</p>
+</div>
+</section>
+
+<section id="lacos" class="card">
+<h2>🔁 4. Laços de repetição</h2>
+
+<div class="exercise">
+<h3>Atividade 6 — Percorrendo uma lista <span class="level">Aplicar</span></h3>
+<pre><code>alunos = ["Ana", "Carlos", "Marina", "Pedro"]
+
+for aluno in alunos:
+    print("Aluno:", aluno)</code></pre>
+<p><strong>Experimente:</strong> coloque mais nomes na lista. O que acontece com o <code>for</code>?</p>
+</div>
+
+<div class="exercise">
+<h3>Atividade 7 — Soma e média <span class="level">Aplicar</span></h3>
+<pre><code>notas = [7, 8, 6, 9, 10]
+
+soma = 0
+
+for nota in notas:
+    soma = soma + nota
+
+media = soma / len(notas)
+
+print("Soma:", soma)
+print("Média:", media)</code></pre>
+<p><strong>Desafio:</strong> tente explicar cada linha antes de executá-la.</p>
+</div>
+
+<div class="exercise">
+<h3>Atividade 8 — Encontre o erro <span class="level">Analisar</span></h3>
+<pre><code>notas = [7, 8, 6, 9, 10]
+
+soma = 0
+
+for nota in notas:
+    soma = soma + 1
+
+media = soma / len(notas)
+
+print(media)</code></pre>
+<p><strong>Investigue:</strong> o programa deveria calcular a média. O resultado está correto?</p>
+<p>Explique qual é o erro lógico e depois corrija o código.</p>
+<textarea placeholder="Minha análise..."></textarea>
+</div>
+</section>
+
+<section id="condicoes" class="card">
+<h2>⚙️ 5. Condições e regras</h2>
+
+<div class="exercise">
+<h3>Atividade 9 — Situação do aluno <span class="level">Aplicar</span></h3>
+<pre><code>media = 7.5
+
+if media >= 7:
+    print("Aprovado")
+elif media >= 5:
+    print("Recuperação")
+else:
+    print("Reprovado")</code></pre>
+<p><strong>Teste:</strong> execute com as médias 8, 6, 4 e 10.</p>
+</div>
+
+<div class="exercise">
+<h3>Atividade 10 — Regra de negócio <span class="level">Analisar → Avaliar</span></h3>
+<div class="task">Uma equipe decidiu que qualquer aluno com média ≥ 5 será aprovado.</div>
+<pre><code>if media >= 5:
+    print("Aprovado")
+else:
+    print("Reprovado")</code></pre>
+<p>Essa regra é adequada se a escola considerar <strong>7</strong> como média mínima?</p>
+<p><strong>Explique sua decisão e proponha uma solução.</strong></p>
+<textarea placeholder="Minha decisão e justificativa..."></textarea>
+</div>
+
+<div class="exercise">
+<h3>Atividade 11 — Sua própria regra <span class="level">Criar</span></h3>
+<p>Crie uma regra para um sistema. Primeiro escreva a regra em português. Depois transforme-a em Python.</p>
+<textarea placeholder="Regra em linguagem natural..."></textarea>
+<pre><code># Transforme sua regra em Python aqui</code></pre>
+</div>
+</section>
+
+<section class="card">
+<h2>🧮 6. Cálculos matemáticos</h2>
+
+<div class="exercise">
+<h3>Atividade 12 — Área de um retângulo <span class="level">Aplicar</span></h3>
+<pre><code>base = float(input("Base: "))
+altura = float(input("Altura: "))
+
+area = base * altura
+
+print("Área:", area)</code></pre>
+<p><strong>Desafio:</strong> adapte o programa para calcular o perímetro.</p>
+</div>
+
+<div class="exercise">
+<h3>Atividade 13 — Média de três notas <span class="level">Aplicar</span></h3>
+<p>Crie um programa que receba três notas e calcule a média.</p>
+<pre><code># Desenvolva sua solução aqui</code></pre>
+</div>
+</section>
+
+<section id="funcoes" class="card">
+<h2>🧩 7. Funções</h2>
+
+<div class="exercise">
+<h3>Atividade 14 — Criando uma função <span class="level">Aplicar</span></h3>
+<pre><code>def apresentar(nome):
+    print("Olá,", nome)
+
+apresentar("Ana")
+apresentar("Carlos")</code></pre>
+<p><strong>Agora faça:</strong> crie uma função chamada <code>calcular_media</code> que receba uma lista de notas e retorne a média.</p>
+</div>
+
+<div class="exercise">
+<h3>Atividade 15 — Função com regra <span class="level">Aplicar → Analisar</span></h3>
+<p>Crie uma função que receba uma média e retorne:</p>
+<ul><li>Aprovado — média ≥ 7</li><li>Recuperação — média ≥ 5</li><li>Reprovado — abaixo de 5</li></ul>
+<pre><code>def situacao(media):
+    # Desenvolva aqui
+    pass</code></pre>
+</div>
+</section>
+
+<section id="modelagem" class="card">
+<h2>🧱 8. Modelagem antes do código</h2>
+<p>Agora pense como um desenvolvedor: <strong>o que o sistema precisa representar?</strong></p>
+
+<div class="exercise">
+<h3>Atividade 16 — Entidade Aluno <span class="level">Analisar</span></h3>
+<div class="task">
+<p><strong>Entidade:</strong> Aluno</p>
+<p><strong>Liste pelo menos 4 atributos:</strong></p>
+<textarea placeholder="Ex.: nome, idade..."></textarea>
+<p><strong>Liste pelo menos 2 comportamentos:</strong></p>
+<textarea placeholder="Ex.: calcular média..."></textarea>
+<p><strong>Liste pelo menos 2 regras:</strong></p>
+<textarea placeholder="Ex.: média mínima..."></textarea>
+</div>
+</div>
+
+<div class="exercise">
+<h3>Atividade 17 — Pense como o sistema <span class="level">Analisar → Avaliar</span></h3>
+<p>Você precisa decidir: <strong>“calcular média”</strong> deve ser apenas uma variável ou um comportamento?</p>
+<p>Escolha uma opção e justifique:</p>
+<div class="check"><input type="radio" name="decisao"> É um dado.</div>
+<div class="check"><input type="radio" name="decisao"> É um comportamento.</div>
+<textarea placeholder="Minha justificativa..."></textarea>
+</div>
+</section>
+
+<section id="classes" class="card">
+<h2>🏗️ 9. Classes e objetos</h2>
+<p>Agora vamos transformar o modelo da entidade <strong>Aluno</strong> em código.</p>
+
+<div class="exercise">
+<h3>Atividade 18 — Criando uma classe <span class="level">Aplicar</span></h3>
+<pre><code>class Aluno:
+    def __init__(self, nome, idade, notas):
+        self.nome = nome
+        self.idade = idade
+        self.notas = notas
+
+aluno1 = Aluno("Ana", 17, [7, 8, 9])
+
+print(aluno1.nome)
+print(aluno1.idade)
+print(aluno1.notas)</code></pre>
+<p><strong>Faça:</strong> crie <code>aluno2</code> com dados diferentes.</p>
+</div>
+
+<div class="exercise">
+<h3>Atividade 19 — Adicionando um comportamento <span class="level">Aplicar</span></h3>
+<pre><code>class Aluno:
+    def __init__(self, nome, notas):
+        self.nome = nome
+        self.notas = notas
+
+    def calcular_media(self):
+        return sum(self.notas) / len(self.notas)
+
+aluno = Aluno("Carlos", [7, 8, 9])
+
+print(aluno.nome)
+print(aluno.calcular_media())</code></pre>
+<p><strong>Observe:</strong> a classe possui dados (<strong>atributos</strong>) e ações (<strong>métodos</strong>).</p>
+</div>
+
+<div class="exercise">
+<h3>Atividade 20 — Situação do aluno <span class="level">Analisar → Criar</span></h3>
+<p>Complete o método abaixo usando <code>if</code>, <code>elif</code> e <code>else</code>.</p>
+<pre><code>class Aluno:
+    def __init__(self, nome, notas):
+        self.nome = nome
+        self.notas = notas
+
+    def calcular_media(self):
+        return sum(self.notas) / len(self.notas)
+
+    def situacao(self):
+        # Crie a regra
+        pass</code></pre>
+<p><strong>Regra:</strong> média ≥ 7 → Aprovado; média ≥ 5 → Recuperação; abaixo de 5 → Reprovado.</p>
+</div>
+</section>
+
+<section id="desafio" class="card">
+<h2>🚀 10. Desafio final — Mini Sistema de Alunos</h2>
+
+<div class="challenge">
+<strong>Problema:</strong> agora você precisa entregar um protótipo funcional para a escola. O sistema deve representar alunos, armazenar suas notas, calcular médias e informar a situação de cada um.
+</div>
+
+<h3>Seu sistema deve:</h3>
+<div class="check"><input type="checkbox"> Criar uma classe <code>Aluno</code>.</div>
+<div class="check"><input type="checkbox"> Utilizar atributos.</div>
+<div class="check"><input type="checkbox"> Utilizar uma lista de notas.</div>
+<div class="check"><input type="checkbox"> Calcular a média.</div>
+<div class="check"><input type="checkbox"> Utilizar <code>if</code>, <code>elif</code> e <code>else</code>.</div>
+<div class="check"><input type="checkbox"> Criar pelo menos três objetos.</div>
+<div class="check"><input type="checkbox"> Utilizar um laço para processar os alunos.</div>
+<div class="check"><input type="checkbox"> Testar alunos com situações diferentes.</div>
+
+<h3>Ponto de partida</h3>
+<pre><code>class Aluno:
+    def __init__(self, nome, notas):
+        self.nome = nome
+        self.notas = notas
+
+    def calcular_media(self):
+        # Desenvolva
+        pass
+
+    def situacao(self):
+        # Desenvolva
+        pass
+
+
+alunos = [
+    Aluno("Ana", [7, 8, 9]),
+    Aluno("Carlos", [5, 6, 5]),
+    Aluno("Marina", [9, 10, 8])
+]
+
+for aluno in alunos:
+    # Mostre nome, média e situação
+    pass</code></pre>
+
+<div class="exercise">
+<h3>⭐ Desafio de evolução</h3>
+<p>Escolha <strong>uma</strong> melhoria para o sistema:</p>
+<div class="grid">
+<div class="mini">Adicionar frequência.</div>
+<div class="mini">Permitir cadastrar novos alunos.</div>
+<div class="mini">Alterar uma nota.</div>
+<div class="mini">Encontrar a maior média.</div>
+<div class="mini">Criar uma classe <code>Turma</code>.</div>
+<div class="mini">Criar um menu de opções.</div>
+</div>
+</div>
+</section>
+
+<section class="card">
+<h2>🏆 11. Autoavaliação</h2>
+<p>Marque o que você consegue fazer <strong>sem copiar um código pronto</strong>.</p>
+<div class="check"><input type="checkbox"> Criar e utilizar variáveis.</div>
+<div class="check"><input type="checkbox"> Trabalhar com listas.</div>
+<div class="check"><input type="checkbox"> Percorrer uma lista com <code>for</code>.</div>
+<div class="check"><input type="checkbox"> Usar <code>if</code>, <code>elif</code> e <code>else</code>.</div>
+<div class="check"><input type="checkbox"> Fazer cálculos com Python.</div>
+<div class="check"><input type="checkbox"> Criar uma função.</div>
+<div class="check"><input type="checkbox"> Identificar atributos e comportamentos.</div>
+<div class="check"><input type="checkbox"> Criar uma classe e um objeto.</div>
+<div class="check"><input type="checkbox"> Transformar uma situação-problema em uma solução de código.</div>
+
+<div class="exercise">
+<h3>Minha principal dificuldade</h3>
+<textarea placeholder="O que ainda preciso revisar?"></textarea>
+<h3>O que eu já consigo fazer sozinho?</h3>
+<textarea placeholder="Registre aqui..."></textarea>
+</div>
+</section>
+
+<section class="card">
+<h2>🧭 Para onde estamos indo?</h2>
+<p>Você começou com <strong>dados</strong>, passou por <strong>processamento e regras</strong> e chegou à <strong>modelagem de entidades com classes e objetos</strong>.</p>
+<div class="bloom">
+<div><strong>RECONHECER</strong>Conceitos</div>
+<div><strong>ENTENDER</strong>Como funcionam</div>
+<div><strong>APLICAR</strong>Em problemas</div>
+<div><strong>ANALISAR</strong>Erros e relações</div>
+<div><strong>AVALIAR</strong>Soluções</div>
+<div><strong>CRIAR</strong>Um sistema</div>
+</div>
+<p class="tip"><strong>Programar não é apenas escrever código.</strong> É compreender um problema, organizar informações, definir regras, testar ideias e construir uma solução que faça sentido.</p>
+</section>
+
+<footer>Revisão de Python • 2º Ano — Eixo II • Modelagem de Sistemas</footer>
+</main>
+</body>
+</html>
